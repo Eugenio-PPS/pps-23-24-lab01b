@@ -8,14 +8,22 @@ public class LogicsImpl implements Logics {
 	private Pair<Integer,Integer> knight;
 	private final Random random = new Random();
 	private final int size;
+
+	private static void checkSize(int size) {
+		if(size < 2) {
+			throw new IllegalArgumentException("Board should be 2x2 or larger!");
+		}
+	}
 	 
     public LogicsImpl(int size){
+		checkSize(size);
     	this.size = size;
         this.pawn = this.randomEmptyPosition();
         this.knight = this.randomEmptyPosition();
     }
 
 	public LogicsImpl(int size, Pair<Integer, Integer> pawnPosition, Pair<Integer, Integer> knightPosition){
+		checkSize(size);
 		this.size = size;
 		this.pawn = pawnPosition;
 		this.knight = knightPosition;

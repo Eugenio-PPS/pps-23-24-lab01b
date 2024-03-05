@@ -38,9 +38,8 @@ public class LogicTest {
         assertThrows(IllegalArgumentException.class, () -> new LogicsImpl(0));
     }
     @Test
-    @Tag("To fix: should not throw StackOverflowError")
     public void oneByOneBoardThrowsStackOverflowError() {
-        assertThrows(StackOverflowError.class, () -> new LogicsImpl(1));
+        assertThrows(IllegalArgumentException.class, () -> new LogicsImpl(1));
     }
 
     @Test
