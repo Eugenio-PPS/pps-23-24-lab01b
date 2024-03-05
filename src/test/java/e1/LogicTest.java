@@ -5,28 +5,6 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 public class LogicTest {
-    private static Optional<Pair<Integer, Integer>> getKnightPosition(Logics board, int size) {
-        for(int i = 0; i < size; i++) {
-            for(int j = 0; j < size; j++) {
-                if(board.hasKnight(i, j)) {
-                    return Optional.of(new Pair<>(i, j));
-                }
-            }
-        }
-
-        return Optional.empty();
-    }
-    private static Optional<Pair<Integer, Integer>> getPawnPosition(Logics board, int size) {
-        for(int i = 0; i < size; i++) {
-            for(int j = 0; j < size; j++) {
-                if(board.hasPawn(i, j)) {
-                    return Optional.of(new Pair<>(i, j));
-                }
-            }
-        }
-
-        return Optional.empty();
-    }
 
     @Test
     public void cannotCreateChessboardWithNegativeSize() {
@@ -47,11 +25,8 @@ public class LogicTest {
         int boardSize = 2;
         Logics board = new LogicsImpl(boardSize);
 
-        boolean pawnFound = this.getPawnPosition(board, boardSize).isPresent();
-        boolean knightFound = this.getKnightPosition(board, boardSize).isPresent();
-
-        assertTrue(pawnFound);
-        assertTrue(knightFound);
+        assertNotNull(board.getKnightPosition());
+        assertNotNull(board.getPawnPosition());
     }
 
     @Test
@@ -59,8 +34,8 @@ public class LogicTest {
         int boardSize = 2;
         Logics board = new LogicsImpl(boardSize);
 
-        Pair<Integer, Integer> pawn = getPawnPosition(board, boardSize).get();
-        Pair<Integer, Integer> knight = getKnightPosition(board, boardSize).get();
+        Pair<Integer, Integer> pawn = board.getPawnPosition();
+        Pair<Integer, Integer> knight = board.getKnightPosition();
 
         assertNotEquals(pawn, knight);
     }
@@ -78,7 +53,7 @@ public class LogicTest {
         int boardSize = 10;
         Logics board = new LogicsImpl(boardSize);
 
-        Pair<Integer, Integer> knightPosition = getKnightPosition(board, boardSize).get();
+        Pair<Integer, Integer> knightPosition = board.getKnightPosition();
 
         assertFalse(board.hit(
                 Math.min(knightPosition.getX() + 2, boardSize - 1),
@@ -91,7 +66,7 @@ public class LogicTest {
         int boardSize = 10;
         Logics board = new LogicsImpl(boardSize);
 
-        Pair<Integer, Integer> knightPosition = getKnightPosition(board, boardSize).get();
+        Pair<Integer, Integer> knightPosition = board.getKnightPosition();
         boolean canMoveUp = knightPosition.getX() < boardSize - 2;
         boolean canMoveRight = knightPosition.getY() < boardSize - 1;
 
@@ -102,7 +77,7 @@ public class LogicTest {
 
         board.hit(newKnightPosition.getX(), newKnightPosition.getY());
 
-        assertEquals(newKnightPosition, getKnightPosition(board, boardSize).get());
+        assertEquals(newKnightPosition, board.getKnightPosition());
     }
 
     @Test
@@ -111,5 +86,21 @@ public class LogicTest {
         Logics board = new LogicsImpl(boardSize, new Pair<>(0, 0), new Pair<>(2, 1));
 
         assertTrue(board.hit(0, 0));
+    }
+
+    @Test
+    public void canGetKnightPosition() {
+        Pair<Integer, Integer> knightPosition = new Pair<>(1, 1);
+        Pair<Integer, Integer> pawnPosition = new Pair<>(2, 1);
+        Logics board = new LogicsImpl(5, pawnPosition, knightPosition);
+        assertEquals(knightPosition, board.getKnightPosition());
+    }
+
+    @Test
+    public void canGetPawnPosition() {
+        Pair<Integer, Integer> knightPosition = new Pair<>(1, 1);
+        Pair<Integer, Integer> pawnPosition = new Pair<>(2, 1);
+        Logics board = new LogicsImpl(5, pawnPosition, knightPosition);
+        assertEquals(pawnPosition, board.getPawnPosition());
     }
 }

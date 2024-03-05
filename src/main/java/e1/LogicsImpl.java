@@ -59,4 +59,14 @@ public class LogicsImpl implements Logics {
 	public boolean hasPawn(int row, int col) {
 		return this.pawn.equals(new Pair<>(row,col));
 	}
+
+	@Override
+	public Pair<Integer, Integer> getKnightPosition() {
+		return this.knight;
+	}
+
+	@Override
+	public Pair<Integer, Integer> getPawnPosition() {
+		return this.pawn;
+	}
 }
