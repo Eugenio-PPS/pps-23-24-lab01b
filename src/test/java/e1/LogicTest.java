@@ -103,4 +103,7 @@ public class LogicTest {
         Logics board = new LogicsImpl(5, pawnPosition, knightPosition);
         assertEquals(pawnPosition, board.getPawnPosition());
     }
+
+    @Test
+    public void
 }
