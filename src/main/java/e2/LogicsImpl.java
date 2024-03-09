@@ -17,4 +17,14 @@ public class LogicsImpl implements Logics {
     public boolean hasMine(Pair<Integer, Integer> minePosition) {
         return this.board.get(minePosition).get().hasMine();
     }
+
+    @Override
+    public void flag(Pair<Integer, Integer> cellPosition) {
+        this.board.get(cellPosition).get().flag();
+    }
+
+    @Override
+    public boolean isFlagged(Pair<Integer, Integer> cellPosition) {
+        return this.board.get(cellPosition).get().isFlagged();
+    }
 }

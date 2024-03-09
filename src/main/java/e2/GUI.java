@@ -50,7 +50,7 @@ public class GUI extends JFrame {
                 final JButton bt = (JButton)e.getSource();
                 if (bt.isEnabled()){
                     final Pair<Integer,Integer> pos = buttons.get(bt);
-                    // call the logic here to put/remove a flag
+                    logics.flag(pos);
                 }
                 drawBoard(); 
             }
@@ -72,18 +72,24 @@ public class GUI extends JFrame {
     private void quitGame() {
         this.drawBoard();
     	for (var entry: this.buttons.entrySet()) {
-            // call the logic here
             // if this button is a mine, draw it "*"
+            if(this.logics.hasMine(entry.getValue())) {
+                entry.getKey().setText("*");
+            }
+            entry.getKey().setEnabled(false);
             // disable the button
     	}
     }
 
     private void drawBoard() {
         for (var entry: this.buttons.entrySet()) {
-            // call the logic here
             // if this button is a cell with counter, put the number
             // if this button has a flag, put the flag
-    	}
+            if(this.logics.isFlagged(entry.getValue())) {
+                entry.getKey().setText("F");
+            }
+
+        }
     }
     
 }

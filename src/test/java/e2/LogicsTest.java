@@ -15,7 +15,6 @@ public class LogicsTest {
 
     @Test
     public void boardHasAtLeastOneMine() {
-        Pair<Integer, Integer> minePosition = new Pair<>(1, 1);
         boolean mineFound = false;
         for(int i = 0; i < BOARD_SIZE; i++) {
             for(int j = 0; j < BOARD_SIZE; j++) {
@@ -23,5 +22,12 @@ public class LogicsTest {
             }
         }
         assertTrue(mineFound);
+    }
+
+    @Test
+    public void aCellCanBeFlagged() {
+        Pair<Integer, Integer> cellPosition = new Pair<>(1, 1);
+        this.logics.flag(cellPosition);
+        assertTrue(this.logics.isFlagged(cellPosition));
     }
 }
