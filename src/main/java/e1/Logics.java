@@ -31,5 +31,9 @@ public interface Logics{
      */
     Pair<Integer, Integer> getKnightPosition();
 
+    /**
+     *
+     * @return the current pawn position
+     */
     Pair<Integer, Integer> getPawnPosition();
 }
