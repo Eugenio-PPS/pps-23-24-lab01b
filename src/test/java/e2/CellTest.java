@@ -40,4 +40,14 @@ public class CellTest {
         assertFalse(this.cell.isFlagged());
     }
 
+    @Test
+    void cellStartsAsNotClicked() {
+        assertFalse(this.cell.isClicked());
+    }
+
+    @Test
+    void cellCanBeClicked() {
+        this.cell.click();
+        assertTrue(this.cell.isClicked());
+    }
 }

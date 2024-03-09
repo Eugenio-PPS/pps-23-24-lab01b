@@ -1,20 +1,26 @@
 package e2;
 
 import java.util.*;
+import java.util.function.Function;
 
 public class NeighbourListImpl<T> implements NeighbourList<T>{
     private List<List<Optional<T>>> storage;
     private Pair<Integer, Integer> size;
     public NeighbourListImpl(Pair<Integer, Integer> size) {
+        this(size, (p) -> Optional.empty());
+    }
+
+    public NeighbourListImpl(Pair<Integer, Integer> size, Function<Pair<Integer, Integer>, Optional<T>> init) {
         this.size = size;
 
         this.storage = new ArrayList<>();
         for(int i = 0; i < size.getY(); i++) {
             this.storage.add(new ArrayList<>());
             for(int j = 0; j < size.getX(); j++) {
-                this.storage.get(i).add(Optional.empty());
+                this.storage.get(i).add(init.apply(new Pair<>(j, i)));
             }
         }
+
     }
 
     @Override

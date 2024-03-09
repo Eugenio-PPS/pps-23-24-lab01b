@@ -4,10 +4,12 @@ public class CellImpl implements Cell{
 
     private final boolean hasMine;
     private boolean flagged;
+    private boolean clicked;
 
     public CellImpl(boolean hasMine) {
         this.hasMine = hasMine;
         this.flagged = false;
+        this.clicked = false;
     }
 
     public CellImpl() {
@@ -32,5 +34,15 @@ public class CellImpl implements Cell{
     @Override
     public void removeFlag() {
         this.flagged = false;
+    }
+
+    @Override
+    public boolean isClicked() {
+        return clicked;
+    }
+
+    @Override
+    public void click() {
+        this.clicked = true;
     }
 }

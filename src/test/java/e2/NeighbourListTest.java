@@ -120,4 +120,20 @@ public class NeighbourListTest {
         );
     }
 
+    @Test
+    public void canBeInitialisedWithInitialiser() {
+        int value = 1;
+        NeighbourList<Integer> list = new NeighbourListImpl<>(
+                new Pair<>(LIST_WIDTH, LIST_HEIGHT),
+                (position) -> Optional.of(value)
+        );
+
+        Optional<Integer> result = list.get(new Pair<>(0, 0));
+
+        assertAll(
+                () -> assertTrue(result.isPresent()),
+                () -> assertEquals(value, result.get())
+        );
+    }
+
 }

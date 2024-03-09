@@ -22,4 +22,8 @@ public interface Cell {
      * Remove the flag from this cell
      */
     void removeFlag();
+
+    boolean isClicked();
+
+    void click();
 }
