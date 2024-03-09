@@ -1,7 +1,5 @@
 package e2;
 
-import e1.Pair;
-
 import java.util.Collection;
 import java.util.Optional;
 
@@ -10,4 +8,6 @@ public interface NeighbourList<T> {
     Optional<T> get(Pair<Integer, Integer> position);
 
     void set(Pair<Integer, Integer> position, T value);
+
+    Neighbours neighbours(Pair<Integer, Integer> position);
 }
