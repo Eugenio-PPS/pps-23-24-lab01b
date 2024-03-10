@@ -55,7 +55,9 @@ public class LogicTest {
 
         Pair<Integer, Integer> knightPosition = board.getKnightPosition();
 
-        assertFalse(board.hit(
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> board.hit(
                 Math.min(knightPosition.getX() + 2, boardSize - 1),
                 Math.min(knightPosition.getY() + 2, boardSize - 1)
         ));

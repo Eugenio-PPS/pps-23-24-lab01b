@@ -43,11 +43,15 @@ public class LogicsImpl implements Logics {
 		// Below a compact way to express allowed moves for the knight
 		int x = row-this.knight.getX();
 		int y = col-this.knight.getY();
-		if (x!=0 && y!=0 && Math.abs(x)+Math.abs(y)==3) {
+		if (validKnightMove(x, y)) {
 			this.knight = new Pair<>(row,col);
 			return this.pawn.equals(this.knight);
 		}
-		return false;
+		throw new IllegalArgumentException("Illegal knight move");
+	}
+
+	private static boolean validKnightMove(int row, int col) {
+		return row != 0 && col != 0 && Math.abs(row) + Math.abs(col) == 3;
 	}
 
 	@Override
