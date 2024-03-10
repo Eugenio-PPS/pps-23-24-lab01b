@@ -39,4 +39,11 @@ public class LogicsTest {
     public void calculateNumberOfNeighbouringMines() {
         assertEquals(4, this.logics.getNumberOfNeighbouringMines(new Pair<>(1, 1)));
     }
+
+    @Test
+    public void aCellCanBeClicked() {
+        Pair<Integer, Integer> cellPosition = new Pair<>(1, 1);
+        this.logics.click(cellPosition);
+        assertTrue(this.logics.isClicked(cellPosition));
+    }
 }

@@ -8,5 +8,9 @@ public interface Logics {
 
     boolean isFlagged(Pair<Integer, Integer> cellPosition);
 
-    int getNumberOfNeighbouringMines(Pair<Integer, Integer> position);
+    long getNumberOfNeighbouringMines(Pair<Integer, Integer> position);
+
+    void click(Pair<Integer, Integer> cellPosition);
+
+    boolean isClicked(Pair<Integer, Integer> cellPosition);
 }

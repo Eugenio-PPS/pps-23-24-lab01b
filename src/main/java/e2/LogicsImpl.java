@@ -1,6 +1,5 @@
 package e2;
 
-import java.util.Random;
 import java.util.function.Function;
 
 public class LogicsImpl implements Logics {
@@ -29,7 +28,21 @@ public class LogicsImpl implements Logics {
     }
 
     @Override
-    public int getNumberOfNeighbouringMines(Pair<Integer, Integer> position) {
-        return 0;
+    public long getNumberOfNeighbouringMines(Pair<Integer, Integer> position) {
+        return this.board.neighbours(position).toList().stream()
+                .filter((x) -> x.isPresent() )
+                .map((x) -> this.board.get(x.get()))
+                .filter((x) -> x.get().hasMine())
+                .count();
+    }
+
+    @Override
+    public void click(Pair<Integer, Integer> cellPosition) {
+        this.board.get(cellPosition).get().click();
+    }
+
+    @Override
+    public boolean isClicked(Pair<Integer, Integer> cellPosition) {
+        return this.board.get(cellPosition).get().isClicked();
     }
 }
