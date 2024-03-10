@@ -10,9 +10,11 @@ public class NeighbourListTest {
     NeighbourList<Integer> list;
     private static final int LIST_WIDTH = 3;
     private static final int LIST_HEIGHT = 3;
+    public static final Pair<Integer, Integer> BOARD_SIZE = new Pair<>(LIST_WIDTH, LIST_HEIGHT);
+
     @BeforeEach
     public void init() {
-        this.list = new NeighbourListImpl<>(new Pair<>(LIST_WIDTH, LIST_HEIGHT));
+        this.list = new NeighbourListImpl<>(BOARD_SIZE);
     }
 
     @Test
@@ -116,7 +118,7 @@ public class NeighbourListTest {
     public void cannotGetNeighboursOfOutOfBoundsPosition() {
         assertThrows(
                 IndexOutOfBoundsException.class,
-                () -> this.list.neighbours(new Pair<>(LIST_WIDTH, LIST_HEIGHT))
+                () -> this.list.neighbours(BOARD_SIZE)
         );
     }
 
@@ -132,7 +134,7 @@ public class NeighbourListTest {
     public void canBeInitialisedWithInitialiser() {
         int value = 1;
         NeighbourList<Integer> list = new NeighbourListImpl<>(
-                new Pair<>(LIST_WIDTH, LIST_HEIGHT),
+                BOARD_SIZE,
                 (position) -> Optional.of(value)
         );
 
@@ -142,6 +144,11 @@ public class NeighbourListTest {
                 () -> assertTrue(result.isPresent()),
                 () -> assertEquals(value, result.get())
         );
+    }
+
+    @Test
+    public void listHasSize() {
+        assertEquals(BOARD_SIZE, this.list.size());
     }
 
 }

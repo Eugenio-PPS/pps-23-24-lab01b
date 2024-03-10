@@ -30,6 +30,7 @@ public class GUI extends JFrame {
         ActionListener onClick = (e)->{
             final JButton bt = (JButton)e.getSource();
             final Pair<Integer,Integer> pos = buttons.get(bt);
+            logics.click(pos);
             boolean aMineWasFound = logics.hasMine(pos); // call the logic here to tell it that cell at 'pos' has been selected
             if (aMineWasFound) {
                 quitGame();
@@ -37,7 +38,7 @@ public class GUI extends JFrame {
             } else {
                 drawBoard();            	
             }
-            boolean isThereVictory = false; // call the logic here to ask if there is victory
+            boolean isThereVictory = this.logics.allMinesAreFlagged(); // call the logic here to ask if there is victory
             if (isThereVictory){
                 quitGame();
                 JOptionPane.showMessageDialog(this, "You won!!");
@@ -84,9 +85,11 @@ public class GUI extends JFrame {
 
     private void drawBoard() {
         for (var entry: this.buttons.entrySet()) {
+            Pair<Integer, Integer> pos = entry.getValue();
             // if this button is a cell with counter, put the number
-            // if this button has a flag, put the flag
-            if(this.logics.isFlagged(entry.getValue())) {
+            if(this.logics.isClicked(pos) && this.logics.getNumberOfNeighbouringMines(pos) > 0) {
+                entry.getKey().setText(String.valueOf(this.logics.getNumberOfNeighbouringMines(pos)));
+            } else if(this.logics.isFlagged(pos)) { // if this button has a flag, put the flag
                 entry.getKey().setText("F");
             }
 

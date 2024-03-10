@@ -45,4 +45,18 @@ public class LogicsImpl implements Logics {
     public boolean isClicked(Pair<Integer, Integer> cellPosition) {
         return this.board.get(cellPosition).get().isClicked();
     }
+
+    @Override
+    public boolean allMinesAreFlagged() {
+        boolean result = true;
+        for(int i = 0; i < this.board.size().getX(); i += 1) {
+            for(int j = 0; j < this.board.size().getY(); j += 1) {
+                Pair<Integer, Integer> currentPosition = new Pair<>(i, j);
+                // If there's a mine, it must be flagged. Otherwise, it must not be flagged.
+                result = result && (this.hasMine(currentPosition) == this.isFlagged(currentPosition));
+            }
+        }
+
+        return result;
+    }
 }

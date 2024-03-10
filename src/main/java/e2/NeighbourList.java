@@ -10,4 +10,6 @@ public interface NeighbourList<T> {
     void set(Pair<Integer, Integer> position, T value);
 
     Neighbours neighbours(Pair<Integer, Integer> position);
+
+    Pair<Integer, Integer> size();
 }

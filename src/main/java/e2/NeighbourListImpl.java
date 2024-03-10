@@ -69,4 +69,9 @@ public class NeighbourListImpl<T> implements NeighbourList<T>{
                 positionIfInBoundsElseEmptyOptional(new Pair<>(position.getX() - 1, position.getY() - 1)) // top left
         );
     }
+
+    @Override
+    public Pair<Integer, Integer> size() {
+        return this.size;
+    }
 }

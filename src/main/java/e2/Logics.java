@@ -13,4 +13,6 @@ public interface Logics {
     void click(Pair<Integer, Integer> cellPosition);
 
     boolean isClicked(Pair<Integer, Integer> cellPosition);
+
+    boolean allMinesAreFlagged();
 }

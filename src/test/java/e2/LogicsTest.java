@@ -46,4 +46,19 @@ public class LogicsTest {
         this.logics.click(cellPosition);
         assertTrue(this.logics.isClicked(cellPosition));
     }
+
+    @Test
+    public void calculateIfAllMinesFlaggedReturnsFalseIfNotAllMinesAreFlagged() {
+        assertFalse(this.logics.allMinesAreFlagged());
+    }
+
+    @Test
+    public void calculateIfAllMinesFlaggedReturnsTrueIfAllMinesAreFlagged() {
+        for(int i = 0; i < BOARD_SIZE; i += 2) {
+            for(int j = 0; j < BOARD_SIZE; j += 2) {
+                this.logics.flag(new Pair<>(i, j));
+            }
+        }
+        assertTrue(this.logics.allMinesAreFlagged());
+    }
 }
