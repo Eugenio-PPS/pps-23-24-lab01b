@@ -36,6 +36,7 @@ public class GUI extends JFrame {
                 quitGame();
                 JOptionPane.showMessageDialog(this, "You lost!!");
             } else {
+                // Autoclick: TODO
                 drawBoard();            	
             }
             boolean isThereVictory = this.logics.allMinesAreFlagged(); // call the logic here to ask if there is victory
