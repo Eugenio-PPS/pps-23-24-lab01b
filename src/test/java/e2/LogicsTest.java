@@ -10,7 +10,11 @@ public class LogicsTest {
 
     @BeforeEach
     public void init() {
-        this.logics = new LogicsImpl(BOARD_SIZE);
+        this.logics = new LogicsImpl(
+                BOARD_SIZE,
+                // Deterministically place mines
+                (p) -> p.getY() % 2 == 0 && p.getX() % 2 == 0
+        );
     }
 
     @Test
@@ -29,5 +33,10 @@ public class LogicsTest {
         Pair<Integer, Integer> cellPosition = new Pair<>(1, 1);
         this.logics.flag(cellPosition);
         assertTrue(this.logics.isFlagged(cellPosition));
+    }
+
+    @Test
+    public void calculateNumberOfNeighbouringMines() {
+        assertEquals(4, this.logics.getNumberOfNeighbouringMines(new Pair<>(1, 1)));
     }
 }

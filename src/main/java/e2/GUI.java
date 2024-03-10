@@ -19,7 +19,8 @@ public class GUI extends JFrame {
     private final Logics logics;
     
     public GUI(int size) {
-        this.logics = new LogicsImpl(size);
+        Random random = new Random();
+        this.logics = new LogicsImpl(size, (p) -> random.nextBoolean());
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(100*size, 100*size);
         

@@ -4,8 +4,8 @@ import java.util.*;
 import java.util.function.Function;
 
 public class NeighbourListImpl<T> implements NeighbourList<T>{
-    private List<List<Optional<T>>> storage;
-    private Pair<Integer, Integer> size;
+    private final List<List<Optional<T>>> storage;
+    private final Pair<Integer, Integer> size;
     public NeighbourListImpl(Pair<Integer, Integer> size) {
         this(size, (p) -> Optional.empty());
     }
@@ -39,33 +39,13 @@ public class NeighbourListImpl<T> implements NeighbourList<T>{
         this.storage.get(position.getY()).set(position.getX(), Optional.of(value));
     }
 
-    private Optional<Pair<Integer, Integer>> leftNeighbour(Pair<Integer, Integer> position) {
-        if(position.getX() > 0) {
-            return Optional.of(new Pair<>(position.getX() - 1, position.getY()));
-        } else {
-            return Optional.empty();
-        }
-    }
-
-    private Optional<Pair<Integer, Integer>> rightNeighbour(Pair<Integer, Integer> position) {
-        if(position.getX() < this.size.getX() - 1) {
-            return Optional.of(new Pair<>(position.getX() + 1, position.getY()));
-        } else {
-            return Optional.empty();
-        }
-    }
-
-    private Optional<Pair<Integer, Integer>> bottomNeighbour(Pair<Integer, Integer> position) {
-        if(position.getY() < this.size.getY() - 1) {
-            return Optional.of(new Pair<>(position.getX(), position.getY() + 1));
-        } else {
-            return Optional.empty();
-        }
-    }
-
-    private Optional<Pair<Integer, Integer>> topNeighbour(Pair<Integer, Integer> position) {
-        if(position.getY() > 0) {
-            return Optional.of(new Pair<>(position.getX(), position.getY() - 1));
+    private Optional<Pair<Integer, Integer>> positionIfInBoundsElseEmptyOptional(Pair<Integer, Integer> position) {
+        if(position.getX() >= 0 &&
+                position.getX() <= this.size.getX() - 1 &&
+                position.getY() >= 0 &&
+                position.getY() <= this.size.getY() - 1
+        ) {
+            return Optional.of(position);
         } else {
             return Optional.empty();
         }
@@ -79,10 +59,14 @@ public class NeighbourListImpl<T> implements NeighbourList<T>{
             throw new IllegalArgumentException();
         }
         return new Neighbours(
-                this.leftNeighbour(position),
-                this.topNeighbour(position),
-                this.bottomNeighbour(position),
-                this.rightNeighbour(position)
+                positionIfInBoundsElseEmptyOptional(new Pair<>(position.getX(), position.getY() - 1)), // top
+                positionIfInBoundsElseEmptyOptional(new Pair<>(position.getX() + 1, position.getY() - 1)), // top right
+                positionIfInBoundsElseEmptyOptional(new Pair<>(position.getX() + 1, position.getY())), // right
+                positionIfInBoundsElseEmptyOptional(new Pair<>(position.getX() + 1, position.getY() + 1)), // bottom right
+                positionIfInBoundsElseEmptyOptional(new Pair<>(position.getX(), position.getY() + 1)), // bottom
+                positionIfInBoundsElseEmptyOptional(new Pair<>(position.getX() - 1, position.getY() + 1)), // bottom left
+                positionIfInBoundsElseEmptyOptional(new Pair<>(position.getX() - 1, position.getY())), // left
+                positionIfInBoundsElseEmptyOptional(new Pair<>(position.getX() - 1, position.getY() - 1)) // top left
         );
     }
 }
