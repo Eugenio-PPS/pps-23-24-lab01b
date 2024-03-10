@@ -6,15 +6,15 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class NeighbourListTest {
-    NeighbourList<Integer> list;
+public class NeighbourTableTest {
+    NeighbourTable<Integer> list;
     private static final int LIST_WIDTH = 3;
     private static final int LIST_HEIGHT = 3;
     public static final Pair<Integer, Integer> BOARD_SIZE = new Pair<>(LIST_WIDTH, LIST_HEIGHT);
 
     @BeforeEach
     public void init() {
-        this.list = new NeighbourListImpl<>(BOARD_SIZE);
+        this.list = new NeighbourTableImpl<>(BOARD_SIZE);
     }
 
     @Test
@@ -133,7 +133,7 @@ public class NeighbourListTest {
     @Test
     public void canBeInitialisedWithInitialiser() {
         int value = 1;
-        NeighbourList<Integer> list = new NeighbourListImpl<>(
+        NeighbourTable<Integer> list = new NeighbourTableImpl<>(
                 BOARD_SIZE,
                 (position) -> Optional.of(value)
         );

@@ -3,10 +3,10 @@ package e2;
 import java.util.function.Function;
 
 public class LogicsImpl implements Logics {
-    NeighbourList<Cell> board;
+    NeighbourTable<Cell> board;
 
     public LogicsImpl(int size, Function<Pair<Integer, Integer>, Boolean> minePlacingAlgorithm) {
-        this.board = new NeighbourListImpl<>(
+        this.board = new NeighbourTableImpl<>(
                 new Pair<>(size, size),
                 (p) -> java.util.Optional.of(new CellImpl(minePlacingAlgorithm.apply(p)))
         );

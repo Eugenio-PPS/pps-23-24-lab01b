@@ -3,14 +3,14 @@ package e2;
 import java.util.*;
 import java.util.function.Function;
 
-public class NeighbourListImpl<T> implements NeighbourList<T>{
+public class NeighbourTableImpl<T> implements NeighbourTable<T> {
     private final List<List<Optional<T>>> storage;
     private final Pair<Integer, Integer> size;
-    public NeighbourListImpl(Pair<Integer, Integer> size) {
+    public NeighbourTableImpl(Pair<Integer, Integer> size) {
         this(size, (p) -> Optional.empty());
     }
 
-    public NeighbourListImpl(Pair<Integer, Integer> size, Function<Pair<Integer, Integer>, Optional<T>> init) {
+    public NeighbourTableImpl(Pair<Integer, Integer> size, Function<Pair<Integer, Integer>, Optional<T>> init) {
         this.size = size;
 
         this.storage = new ArrayList<>();
