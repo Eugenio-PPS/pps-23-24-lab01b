@@ -40,18 +40,19 @@ public class LogicsImpl implements Logics {
 		if (row<0 || col<0 || row >= this.size || col >= this.size) {
 			throw new IndexOutOfBoundsException();
 		}
-		// Below a compact way to express allowed moves for the knight
-		int x = row-this.knight.getX();
-		int y = col-this.knight.getY();
-		if (validKnightMove(x, y)) {
+		if (validKnightMove(this.knight, new Pair<>(row, col))) {
 			this.knight = new Pair<>(row,col);
 			return this.pawn.equals(this.knight);
 		}
 		throw new IllegalArgumentException("Illegal knight move");
 	}
 
-	private static boolean validKnightMove(int row, int col) {
-		return row != 0 && col != 0 && Math.abs(row) + Math.abs(col) == 3;
+	private static boolean validKnightMove(Pair<Integer, Integer> oldPosition, Pair<Integer, Integer> newPosition) {
+		// Below a compact way to express allowed moves for the knight
+
+		int x = newPosition.getX() - oldPosition.getX();
+		int y = newPosition.getY() - oldPosition.getY();
+		return x != 0 && y != 0 && Math.abs(x) + Math.abs(y) == 3;
 	}
 
 	@Override
